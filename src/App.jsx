@@ -1,27 +1,30 @@
 import { useState } from "react";
 
-const Display = (props) => <div>{props.value}</div>;
-
-const Button = (props) => (
-  <button onClick={props.handleClick}>{props.text}</button>
+const Display = ({ counter }) => <div>{counter}</div>;
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>{text}</button>
 );
 
 const App = (props) => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
+  const [counter, setCounter] = useState(0);
 
   const setToGood = (newValue) => {
     console.log("value now", newValue);
     setGood(newValue);
+    setCounter(counter + 1);
   };
   const setToNeutral = (newValue) => {
     console.log("value now", newValue);
     setNeutral(newValue);
+    setCounter(counter + 1);
   };
   const setToBad = (newValue) => {
     console.log("value now", newValue);
     setBad(newValue);
+    setCounter(counter + 1);
   };
 
   return (
@@ -38,6 +41,9 @@ const App = (props) => {
         <div> good {good}</div>
         <div>neutral {neutral}</div>
         <div>bad {bad}</div>
+        <div>all {counter}</div>
+        <div>average {(good * 1 + bad * -1 + neutral * 0) / counter}</div>
+        <div>positive {(good / counter) * 100}%</div>
       </div>
     </div>
   );
